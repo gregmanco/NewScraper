@@ -49,7 +49,7 @@ app.get("/scrape", function(req, res) {
         result.link = $(this)
           .children("a")
           .attr("href");
-        result.sumamry = $(this)
+        result.summary = $(this)
           .children("a")
           .text();
   
