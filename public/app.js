@@ -30,8 +30,9 @@ $.getJSON("/articles", function(data) {
         // A textarea to add a new comment body
         $("#comment").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new comment, with the id of the article saved to it
-        $("#comment").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-  
+        $("#comment").append("<button data-id=" + data._id + "' id='savecomment'>Save Comment</button>");
+        $("#comment").append("<button data-id=" + data._id + "' id='deleteComment'>Delete Comment</button");
+
         // If there's a comment on the article
         if (data.comment) {
           // Place the title of the comment in the title input

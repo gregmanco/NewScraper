@@ -4,9 +4,9 @@
       <h1>News Scraper</h1>
       <h2><i>All the news. That you can scrape.</i></h2>
           {{#each article}}
-            <p> Title: {{title}}</p>
-            <p> Summary: {{summmary}}</p>
-            <p> Link: {{link}}</p>
+            <p data-id="{{_id}}"> Title: {{title}}</p>
+            <p data-id="{{_id}}"> Summary: {{summmary}}</p>
+            <p data-id="{{_id}}"> Link: {{link}}</p>
           {{/each}}
       <div id="comment"> </div>
     </div>
