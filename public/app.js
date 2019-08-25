@@ -30,8 +30,9 @@ $.getJSON("/articles", function(data) {
         // A textarea to add a new comment body
         $("#comment").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new comment, with the id of the article saved to it
-        $("#comment").append("<button data-id=" + data._id + "' id='savecomment'>Save Comment</button>");
-        $("#comment").append("<button data-id=" + data._id + "' id='deleteComment'>Delete Comment</button");
+        $("#comment").append("<button data-id=" + data._id + " id='savecomment'>Save Comment</button>");
+        // Appends a button to the comment that will be able to delete the comment
+        $("#comment").append("<button data-id=" + data.comment.id + "' id='deleteComment'>Delete Comment</button");
 
         // If there's a comment on the article
         if (data.comment) {
@@ -47,6 +48,10 @@ $.getJSON("/articles", function(data) {
   $(document).on("click", "#savecomment", function() {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
+    console.log(thisId);
+
+    console.log($("#titleinput").val())
+    console.log($("#bodyinput").val());
   
     // Run a POST request to change the comment, using what's entered in the inputs
     $.ajax({
@@ -71,3 +76,18 @@ $.getJSON("/articles", function(data) {
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });
+
+  $(document).on("click", "#deleteComment", function () {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        url: "/articles/" + thisId,
+        method: "delete"
+    }).then(function (data) {
+
+      $("#comment").empty();
+      
+
+      
+    });
+  });
+       
