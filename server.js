@@ -142,15 +142,11 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-app.get("/articles/:id", function(req, res) {
-  db.Comment.deleteOne({_id: req.params.id})
+app.delete("/articles/:id", function(req, res) {
+
   db.Comment.remove({ _id: req.params.id }).then(function () {
     return db.Article.findOneAndUpdate({ comment: req.params.id }, { $unset: { comment: "" } }, { new: true });
   }).catch(err => console.log(err));
-  db.Article.deleteOne({comment: req.params.id})
-  .then(function(dbArticle) {
-    res.send(dbArticle)
-  })
 })
 
 
