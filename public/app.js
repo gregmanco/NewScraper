@@ -32,7 +32,7 @@ $.getJSON("/articles", function(data) {
         // A button to submit a new comment, with the id of the article saved to it
         $("#comment").append("<button data-id=" + data._id + " id='savecomment'>Save Comment</button>");
         // Appends a button to the comment that will be able to delete the comment
-        $("#comment").append("<button data-id=" + data.comment.id + "' id='deleteComment'>Delete Comment</button");
+        $("#comment").append("<button data-id=" + data.comment._id + " id='deleteComment'>Delete Comment</button");
 
         // If there's a comment on the article
         if (data.comment) {
@@ -81,7 +81,7 @@ $.getJSON("/articles", function(data) {
     var thisId = $(this).attr("data-id");
     $.ajax({
         url: "/articles/" + thisId,
-        method: "delete"
+        method: "GET"
     }).then(function (data) {
 
       $("#comment").empty();

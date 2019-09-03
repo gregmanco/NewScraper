@@ -142,10 +142,21 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-app.delete("/articles/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-    db.Comment.delete({_id: req.params.id})
-});
+app.get("/articles/:id", function(req, res) {
+  db.Comment.deleteOne({_id: req.params.id})
+  db.Comment.remove({ _id: req.params.id }).then(function () {
+    return db.Article.findOneAndUpdate({ comment: req.params.id }, { $unset: { comment: "" } }, { new: true });
+  }).catch(err => console.log(err));
+  db.Article.deleteOne({comment: req.params.id})
+  .then(function(dbArticle) {
+    res.send(dbArticle)
+  })
+})
+
+
+ //   var condition = "id = " + req.params.id;
+   
+//});
 
 
 
